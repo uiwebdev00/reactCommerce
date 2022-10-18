@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import RouteConstants from '../../RoutesConstant'
 export default function CreateProduct() {
@@ -10,7 +10,31 @@ export default function CreateProduct() {
   const [description, setdescription] = useState('')
   const [category, setcategory] = useState('')
   const [image, setimage] = useState('')
+  const [data, setdata] = useState('')
   const [error, seterror] = useState('')
+  const [ispending, setispending] = useState(true)
+  useEffect(() => {
+
+    fetch('http://localhost:8000/categories')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status)
+        }
+        return response.json()
+      })
+      .then((data) => {
+
+        setdata(data)
+        setispending(false)
+      })
+      .catch((error) => {
+        seterror(error)
+        setispending(false)
+
+      })
+
+  }, [])
+  
   const handleSubmit =(e)=>{
     
         e.preventDefault()
@@ -55,11 +79,7 @@ export default function CreateProduct() {
               <div class="form-group" onChange={(e)=>{setcategory(e.target.value)}}>
                 <label>Select Category</label>
                 <select class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
+                  {data&& data.map((category)=>(<option>{category.title}</option>))}
                 </select>
               </div>
               <div className="form-group">

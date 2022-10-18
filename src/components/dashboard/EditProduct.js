@@ -6,6 +6,7 @@ export default function EditProduct() {
     const{id}=useParams()
     const navigate =useNavigate()
     const [data, setdata] = useState()
+    const [getcategory, setgetcategory] = useState()
     const [ispending, setispending] = useState(true)
     const [title, settitle] = useState()
     const [price, setprice] = useState()
@@ -14,6 +15,25 @@ export default function EditProduct() {
     const [image, setimage] = useState()
     const [error, seterror] = useState()
     useEffect(() => {
+
+      fetch('http://localhost:8000/categories')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.status)
+          }
+          return response.json()
+        })
+        .then((data) => {
+  
+          setgetcategory(data)
+          setispending(false)
+        })
+        .catch((error) => {
+          seterror(error)
+          setispending(false)
+  
+        })
+  
 
         fetch(`http://localhost:8000/products/${id}`)
           .then((response) => {
@@ -80,11 +100,7 @@ export default function EditProduct() {
                 <div class="form-group"  onChange={(e)=>{setcategory(e.target.value)}}>
                   <label>Select Category</label>
                   <select class="form-control" defaultValue={data.category} >
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
+                  {getcategory&& getcategory.map((category)=>(<option>{category.title}</option>))}
                   </select>
                 </div>
                 <div className="form-group">
