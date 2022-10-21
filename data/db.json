@@ -1,5 +1,24 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "test@mailinator.com",
+      "password": "$2a$10$r2atipaWAdP/vD5WMUzAtulRw5Mj1gWETY2vpyIyRVXW1OW5gTSYS",
+      "username": "hohyby",
+      "id": 1
+    },
+    {
+      "email": "hife@mailinator.com",
+      "password": "$2a$10$RELB.0vp4UE2eSAh8kg7ceUYUOIKkH1Xu6YGnm.AZvFeA.PEs59JO",
+      "username": "xonux",
+      "id": 2
+    },
+    {
+      "email": "pufydyjuh@mailinator.com",
+      "password": "$2a$10$fqM7FXi5SVDzIag3E4xHuub82E4LMs2eIqEIWtujsqJGLRDZukc5G",
+      "username": "wutobyh",
+      "id": 3
+    }
+  ],
   "categories": [
     {
       "id": 1,
